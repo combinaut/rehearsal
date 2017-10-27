@@ -7,9 +7,10 @@ module Rehearsal
     end
 
     def call(env)
-      @env = env
+      @original_env = env.dup
+      @request_env = env
       @redirects_followed = []
-      request = Rack::Request.new(env)
+      request = Rack::Request.new(@request_env)
 
       if rehearsal?(request)
         rehearse(request) { process_request(request) }
@@ -72,19 +73,14 @@ module Rehearsal
     def request_url(url)
       uri = URI(url)
       params = Rack::Utils.parse_query(uri.query)
-      request = ActionDispatch::Request.new @env.dup.merge({
+      request = ActionDispatch::Request.new @original_env.dup.merge({
         'rehearsal.preview' => true,
         'REQUEST_METHOD' => 'GET',
         'REQUEST_URI' => url,
-        # 'REQUEST_PATH' => uri.path,
+        'REQUEST_PATH' => uri.path,
         'PATH_INFO' => uri.path,
-        'QUERY_STRING' => uri.query,
-        # 'rack.request.query_string' => uri.query,
-        # 'rack.request.query_hash' => params,
-        'action_dispatch.request.parameters' => params,
-        'action_dispatch.request.path_parameters' => params,
-        'action_dispatch.request.request_parameters' => params
-      }).except('rack.request.form_hash')
+        'QUERY_STRING' => uri.query
+      })
 
       return objectify_response(process_request(request))
     end
@@ -98,7 +94,7 @@ module Rehearsal
     end
 
     def action_controller
-      @env.fetch('action_controller.instance')
+      @request_env.fetch('action_controller.instance')
     end
 
     def redirect_history
