@@ -182,6 +182,16 @@ describe Rehearsal::Middleware do
 
         expect { execute_request(request_url) }.to raise_exception(Rehearsal::RedirectLoopError)
       end
+
+      it 'limits the number of redirects using Configuration.redirect_limit' do
+        allow(Rehearsal::Configuration).to receive(:redirect_limit).and_return(2)
+
+        app.mock(redirect_url1, status: 307, headers: { 'LOCATION' => redirect_url2})
+        app.mock(redirect_url2, status: 307, headers: { 'LOCATION' => final_url})
+        app.mock(final_url)
+
+        expect { execute_request(request_url) }.to raise_exception(Rehearsal::TooManyRedirectsError)
+      end
     end
 
     context 'when the preview request returns a 4xx' do

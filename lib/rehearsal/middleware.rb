@@ -61,8 +61,10 @@ module Rehearsal
 
     def follow_redirect(response)
       @redirects_followed << response.location
-      if @redirects_followed.count(response.location) > 1
-        raise RedirectLoopError, "Redirect loop detected: #{@redirects_followed.join(' -> ')}"
+      if @redirects_followed.count > Configuration.redirect_limit
+        raise TooManyRedirectsError, "Exceeded redirect limit of #{Configuration.redirect_limit}: #{redirect_history}"
+      elsif @redirects_followed.count(response.location) > 1
+        raise RedirectLoopError, "Redirect loop detected: #{redirect_history}"
       end
       request_url(response.location)
     end
@@ -98,9 +100,14 @@ module Rehearsal
     def action_controller
       @env.fetch('action_controller.instance')
     end
+
+    def redirect_history
+      @redirects_followed.join(' -> ')
+    end
   end
 
   # EXCEPTIONS
   class RehearsalError < StandardError; end
   class RedirectLoopError < RehearsalError; end
+  class TooManyRedirectsError < RehearsalError; end
 end

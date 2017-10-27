@@ -34,3 +34,12 @@ The preview url may be defined in the following ways:
 
 NOTE: If left blank, the preview url will be determined from the response of the update request. If that request returns
 a redirect, the redirect chain will be followed until the response is not a redirect.
+
+### redirect_limit
+
+The number of allowable redirects can be configured in order to defend against an infinite redirecting bug. This is
+defaulted to a sane value, but can be adjusted as necessary.
+
+```ruby
+Rehearsal::Configuration.redirect_limit = 3
+```
