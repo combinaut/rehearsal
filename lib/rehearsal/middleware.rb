@@ -74,7 +74,7 @@ module Rehearsal
       uri = URI(url)
       params = Rack::Utils.parse_query(uri.query)
       request = ActionDispatch::Request.new @original_env.dup.merge({
-        'rehearsal.preview' => true,
+        'rehearsal.preview_url' => url,
         'REQUEST_METHOD' => 'GET',
         'REQUEST_URI' => url,
         'REQUEST_PATH' => uri.path,

@@ -8,7 +8,7 @@ wrapping both in a single database transaction that is rolled back after the pre
 
 Simply include the gem in your bundle, or `require` it by hand.
 
-## Options
+## Setup
 
 ### trigger
 
@@ -42,4 +42,18 @@ defaulted to a sane value, but can be adjusted as necessary.
 
 ```ruby
 Rehearsal::Configuration.redirect_limit = 3
+```
+
+## Response Headers
+
+Since the request is redirected internally to the preview url, the browser will show the original request url.
+Rehearsal injects a `rehearsal.preview_url` header into the response. This header is set to the url of the the final
+preview url after redirection by reading the `Response` header. A potential use case for this data is to rewrite the
+browser url history when the response returns, so that it shows the url of the preview instead of the original request.
+
+```erb
+<%= tag(:meta, property: 'preview_url', content: request['rehearsal.preview_url']) %>
+<script>
+  window.history.replaceState(null, null, $('meta[property=preview_url]').attr('content'));
+</script>
 ```
