@@ -81,6 +81,8 @@ describe Rehearsal::Middleware do
         expect(app.requests.last).to have_attributes(params: { 'success' => 'true' })
       end
 
+      it 'does not include rack.request.form_hash values from the original request in the preview request'
+
       it 'clears the flash'
     end
 
