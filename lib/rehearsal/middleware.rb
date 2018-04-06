@@ -79,8 +79,9 @@ module Rehearsal
         'REQUEST_URI' => url,
         'REQUEST_PATH' => uri.path,
         'PATH_INFO' => uri.path,
-        'QUERY_STRING' => uri.query
-      }).except('rack.request.form_hash')
+        'QUERY_STRING' => uri.query,
+        'rack.request.form_hash' => {}
+      })
 
       return objectify_response(process_request(request))
     end
