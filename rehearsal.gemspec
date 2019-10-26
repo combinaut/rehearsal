@@ -5,11 +5,11 @@ require "rehearsal/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "rehearsal"
+  s.name        = "combinaut_rehearsal"
   s.version     = Rehearsal::VERSION
   s.authors     = ["Ryan Wallace", "Nicholas Jakobsen"]
-  s.email       = ["contact@culturecode.ca"]
-  s.homepage    = "http://github.com/culturecode/rehearsal"
+  s.email       = ["hello@combinaut.com"]
+  s.homepage    = "http://github.com/combinaut/rehearsal"
   s.summary     = "Rack Middleware that handles directs incoming requests to their aliased path targets"
   s.description = "Rack Middleware that handles directs incoming requests to their aliased path targets"
 
