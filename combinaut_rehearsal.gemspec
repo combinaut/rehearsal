@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Ryan Wallace", "Nicholas Jakobsen"]
   s.email       = ["hello@combinaut.com"]
   s.homepage    = "http://github.com/combinaut/rehearsal"
-  s.summary     = "Rack Middleware that handles directs incoming requests to their aliased path targets"
-  s.description = "Rack Middleware that handles directs incoming requests to their aliased path targets"
+  s.summary     = "Rack Middleware that allows model changes to be previewed without persisting them to the database"
+  s.description = "Rehearsal is a Rack Middleware gem that allows model changes to be previewed without persisting them to the database. It achieves this by intercepting the original update request and spawning a second request to Rails for a preview, wrapping both in a single database transaction that is rolled back after the preview is generated."
 
   s.files = Dir["{app}/**/*"] + Dir["{lib}/**/*"] + ["MIT-LICENSE", "README.md"]
 
