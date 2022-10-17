@@ -15,8 +15,9 @@ This gem is middleware and needs to be injected manually to ensure it sits in th
 e.g. in application.rb:
 
 ```
-config.middleware.use Rehearsal::Middleware
+require 'rehearsal/middleware'
 
+config.middleware.use Rehearsal::Middleware
 ```
 
 Rehearsal will need to be inserted before any middleware that modifies the URL.
