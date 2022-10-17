@@ -20,7 +20,7 @@ require 'rehearsal/middleware'
 config.middleware.use Rehearsal::Middleware
 ```
 
-Rehearsal will need to be inserted before any middleware that modifies the URL.
+Since Rehearsal makes additional calls down the middleware stack, typical usage is to insert it before any middleware that modifies incoming requests.
 
 ### trigger
 
