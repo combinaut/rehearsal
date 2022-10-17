@@ -10,6 +10,17 @@ Simply include the gem in your bundle, or `require` it by hand.
 
 ## Setup
 
+This gem is middleware and needs to be injected manually to ensure it sits in the correct order within your middleware stack.
+
+e.g. in application.rb:
+
+```
+config.middleware.use Rehearsal::Middleware
+
+```
+
+Rehearsal will need to be inserted before any middleware that modifies the URL.
+
 ### trigger
 
 The trigger defines a proc that enables the rehearsal mechanism for the request. Keep in mind the request has not yet
