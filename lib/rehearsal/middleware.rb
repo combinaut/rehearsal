@@ -36,7 +36,7 @@ module Rehearsal
       end
       ActiveRecord::Base.logger.info "Rehearsal ending"
 
-      return [response.status, response.header, response.body]
+      return [response.status, response.headers, response.body]
     end
 
     def rehearsal?(request)
