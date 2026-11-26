@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     combinaut_rehearsal (0.1.4)
-      ostruct
       rails (>= 4.2)
 
 GEM
@@ -141,7 +140,6 @@ GEM
     nokogiri (1.19.7)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    ostruct (0.6.3)
     pp (0.6.4)
       prettyprint
     prettyprint (0.2.1)
@@ -222,14 +220,6 @@ GEM
       rspec-support (>= 3.13.0, < 5.0.0)
     rspec-support (3.13.8)
     securerandom (0.4.1)
-    sprockets (4.4.1)
-      concurrent-ruby (~> 1.1)
-      logger
-      rack (>= 2.2.4, < 4)
-    sprockets-rails (3.5.2)
-      actionpack (>= 6.1)
-      activesupport (>= 6.1)
-      sprockets (>= 3.0.0)
     sqlite3 (2.10.2)
       mini_portile2 (~> 2.8.0)
     thor (1.5.0)
@@ -254,7 +244,6 @@ DEPENDENCIES
   pry
   pry-byebug
   rspec-rails (~> 8.1)
-  sprockets-rails
   sqlite3
 
 BUNDLED WITH
