@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module Rehearsal
   module Configuration
     mattr_accessor :preview_url

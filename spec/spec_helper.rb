@@ -8,6 +8,7 @@ Combustion.initialize! :all
 
 require 'rspec/rails'
 require 'rehearsal'
+require 'rehearsal/middleware'
 
 # If you're using Capybara:
 # require 'capybara/rails'
